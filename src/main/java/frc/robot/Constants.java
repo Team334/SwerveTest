@@ -16,4 +16,18 @@ public final class Constants {
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
   }
+
+  public static class CAN {
+    public static final int DRIVE_FRONT_LEFT = 1;
+    public static final int ROT_FRONT_LEFT = 2;
+    
+    public static final int DRIVE_FRONT_RIGHT = 3;
+    public static final int ROT_FRONT_RIGHT = 4;
+
+    public static final int DRIVE_BACK_RIGHT = 5;
+    public static final int ROT_BACK_RIGHT = 6;
+
+    public static final int DRIVE_BACK_LEFT = 7;
+    public static final int ROT_BACK_LEFT = 8;
+  }
 }
