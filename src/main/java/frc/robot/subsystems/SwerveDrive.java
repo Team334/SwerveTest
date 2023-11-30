@@ -4,8 +4,6 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
-
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.utils.SwerveModule;
@@ -23,5 +21,25 @@ public class SwerveDrive extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+  }
+
+  /**
+   * Calls drive method of each SwerveModule.
+   */
+  public void driveTest(double speed) {
+    _frontLeft.drive(speed);
+    _frontRight.drive(speed);
+    _backLeft.drive(speed);
+    _backRight.drive(speed);
+  }
+
+  /**
+   * Calls rotate method of each SwerveModule.
+   */
+  public void rotateTest(double speed) {
+    _frontLeft.rotate(speed);
+    _frontRight.rotate(speed);
+    _backLeft.rotate(speed);
+    _backRight.rotate(speed);
   }
 }

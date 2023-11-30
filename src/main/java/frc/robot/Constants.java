@@ -29,5 +29,14 @@ public final class Constants {
 
     public static final int DRIVE_BACK_LEFT = 7;
     public static final int ROT_BACK_LEFT = 8;
+
+    public static final int ENC_FRONT_LEFT = 0;
+    public static final int ENC_FRONT_RIGHT = 0;
+    public static final int ENC_BACK_LEFT = 0;
+    public static final int ENC_BACK_RIGHT = 0;
+
+    public static final int CAN_TIMEOUT = 10;
   }
+
+  public static final int DRIVER_CONTROLLER = 0;
 }
