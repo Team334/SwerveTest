@@ -5,10 +5,8 @@ import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.sensors.AbsoluteSensorRange;
 import com.ctre.phoenix.sensors.CANCoder;
-import com.ctre.phoenix.sensors.SensorInitializationStrategy;
 
 import frc.robot.Constants;
-import frc.robot.Constants.CAN;
 
 public class SwerveModule {
     private final TalonFX _driveMotor;
@@ -16,13 +14,15 @@ public class SwerveModule {
 
     private final CANCoder _encoder;
 
-    public SwerveModule(int driveMotorId, int rotationMotorId, int encoderId) {
+    public SwerveModule(int driveMotorId, int rotationMotorId, int encoderId, double angleOffset) {
         _driveMotor = new TalonFX(driveMotorId);
         _rotationMotor = new TalonFX(rotationMotorId);
 
         _encoder = new CANCoder(encoderId);
 
-        _encoder.configAbsoluteSensorRange(AbsoluteSensorRange.Unsigned_0_to_360, Constants.CAN.CAN_TIMEOUT);
+        _encoder.configMagnetOffset(angleOffset, Constants.CAN.CAN_TIMEOUT);
+        _encoder.configAbsoluteSensorRange(AbsoluteSensorRange.Signed_PlusMinus180, Constants.CAN.CAN_TIMEOUT);
+
         TalonFXConfig.configureFalcon(_driveMotor);
         TalonFXConfig.configureFalcon(_rotationMotor);
     }
@@ -35,7 +35,7 @@ public class SwerveModule {
         _rotationMotor.set(TalonFXControlMode.PercentOutput, speed);
     }
 
-    public double getEnc() {
+    public double getAngle() {
         return _encoder.getAbsolutePosition();
     }
 }
