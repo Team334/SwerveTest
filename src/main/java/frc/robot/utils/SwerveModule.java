@@ -36,6 +36,7 @@ public class SwerveModule {
 
     public void drive(double speed) {
         _driveMotor.set(TalonFXControlMode.PercentOutput, speed);
+        // _driveMotor.set(TalonFXControlMode.Velocity, speed);
     }
 
     public void rotate(double speed) {
@@ -51,7 +52,7 @@ public class SwerveModule {
     }
 
     public void setState(SwerveModuleState state) {
-
+        // double state.speedMetersPerSecond
     }
 
     public SwerveModuleState getState() {

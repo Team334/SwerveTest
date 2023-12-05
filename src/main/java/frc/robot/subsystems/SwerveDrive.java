@@ -11,8 +11,8 @@ import frc.robot.utils.SwerveModule;
 
 public class SwerveDrive extends SubsystemBase {
   // TODO: Get angle offset for each module (zero each one)
-  private final SwerveModule _frontLeft = new SwerveModule(Constants.CAN.DRIVE_FRONT_LEFT, Constants.CAN.ROT_FRONT_LEFT, Constants.CAN.ENC_FRONT_LEFT, 0);
-  private final SwerveModule _frontRight = new SwerveModule(Constants.CAN.DRIVE_FRONT_RIGHT, Constants.CAN.ROT_FRONT_RIGHT, Constants.CAN.ENC_FRONT_RIGHT, -58);
+  private final SwerveModule _frontLeft = new SwerveModule(Constants.CAN.DRIVE_FRONT_LEFT, Constants.CAN.ROT_FRONT_LEFT, Constants.CAN.ENC_FRONT_LEFT, -92);
+  private final SwerveModule _frontRight = new SwerveModule(Constants.CAN.DRIVE_FRONT_RIGHT, Constants.CAN.ROT_FRONT_RIGHT, Constants.CAN.ENC_FRONT_RIGHT, -53);
   private final SwerveModule _backRight = new SwerveModule(Constants.CAN.DRIVE_BACK_RIGHT, Constants.CAN.ROT_BACK_RIGHT, Constants.CAN.ENC_BACK_RIGHT, 0);
   private final SwerveModule _backLeft = new SwerveModule(Constants.CAN.DRIVE_BACK_LEFT, Constants.CAN.ROT_BACK_LEFT, Constants.CAN.ENC_BACK_LEFT, 0);
 
@@ -27,25 +27,27 @@ public class SwerveDrive extends SubsystemBase {
     SmartDashboard.putNumber("Front Right", _frontRight.getAngle());
     SmartDashboard.putNumber("Back Right", _backRight.getAngle());
     SmartDashboard.putNumber("Back Left", _backLeft.getAngle());
+
+    SmartDashboard.putNumber("Front Right Speed", _frontRight.getDriveVelocity());
   }
 
   /**
    * Calls drive method of each SwerveModule.
    */
   public void driveTest(double speed) {
-    // _frontLeft.drive(speed);
+    _frontLeft.drive(speed);
     _frontRight.drive(speed);
-    // _backRight.drive(speed);
-    // _backLeft.drive(speed);
+    _backRight.drive(speed);
+    _backLeft.drive(speed);
   }
 
   /**
    * Calls rotate method of each SwerveModule.
    */
   public void rotateTest(double speed) {
-    // _frontLeft.rotate(speed);
+    _frontLeft.rotate(speed);
     _frontRight.rotate(speed);
-    // _backRight.rotate(speed);
-    // _backLeft.rotate(speed);
+    _backRight.rotate(speed);
+    _backLeft.rotate(speed);
   }
 }
