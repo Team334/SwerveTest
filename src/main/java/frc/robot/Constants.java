@@ -38,9 +38,16 @@ public final class Constants {
     public static final int CAN_TIMEOUT = 10;
   }
 
+  public static class Speeds {
+    public static final double SWERVE_DRIVE_SPEED = 0.3;
+    public static final double SWERVE_DRIVE_MAX_SPEED = 3; // TODO: Get this value
+  }
+
   public static class Physical {
-    public static final int SWERVE_DRIVE_GEAR_RATIO = 1; // TODO: Get this value
-    public static final int SWERVE_DRIVE_WHEEL_RADIUS = 1; // TODO: Get this value
+    // GEAR RATIOS ARE: DRIVEN GEAR TEETH / DRIVING GEAR TEETH
+
+    public static final double SWERVE_DRIVE_GEAR_RATIO = 6.75; // TODO: Get this value
+    public static final double SWERVE_DRIVE_WHEEL_RADIUS = 0.1; // TODO: Get this value
   }
 
   public static final int DRIVER_CONTROLLER = 0;

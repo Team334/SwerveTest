@@ -35,19 +35,19 @@ public class SwerveDrive extends SubsystemBase {
    * Calls drive method of each SwerveModule.
    */
   public void driveTest(double speed) {
-    _frontLeft.drive(speed);
+    // _frontLeft.drive(speed);
     _frontRight.drive(speed);
-    _backRight.drive(speed);
-    _backLeft.drive(speed);
+    // _backRight.drive(speed);
+    // _backLeft.drive(speed);
   }
 
   /**
    * Calls rotate method of each SwerveModule.
    */
   public void rotateTest(double speed) {
-    _frontLeft.rotate(speed);
+    // _frontLeft.rotate(speed);
     _frontRight.rotate(speed);
-    _backRight.rotate(speed);
-    _backLeft.rotate(speed);
+    // _backRight.rotate(speed);
+    // _backLeft.rotate(speed);
   }
 }
