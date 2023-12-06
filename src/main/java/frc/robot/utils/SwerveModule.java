@@ -44,7 +44,13 @@ public class SwerveModule {
     }
 
     public double getDriveVelocity() {
-        return _driveMotor.getSelectedSensorVelocity();
+        // return _driveMotor.getSelectedSensorVelocity();
+
+        double talon_rps = _driveMotor.getSelectedSensorVelocity() / 2048 * 100;
+        double wheel_circumference = 2 * Math.PI * Constants.Physical.SWERVE_DRIVE_WHEEL_RADIUS;
+
+        // return the speed of the swerve wheel itself (talon rps times gear ratio time wheel size)
+        return talon_rps * Constants.Physical.SWERVE_DRIVE_GEAR_RATIO * wheel_circumference;
     }
 
     public double getAngle() {

@@ -38,5 +38,10 @@ public final class Constants {
     public static final int CAN_TIMEOUT = 10;
   }
 
+  public static class Physical {
+    public static final int SWERVE_DRIVE_GEAR_RATIO = 1; // TODO: Get this value
+    public static final int SWERVE_DRIVE_WHEEL_RADIUS = 1; // TODO: Get this value
+  }
+
   public static final int DRIVER_CONTROLLER = 0;
 }
