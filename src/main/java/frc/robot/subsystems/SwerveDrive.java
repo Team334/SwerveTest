@@ -4,15 +4,17 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.utils.SwerveModule;
 
 public class SwerveDrive extends SubsystemBase {
-  private final SwerveModule _frontLeft = new SwerveModule(Constants.CAN.DRIVE_FRONT_LEFT, Constants.CAN.ROT_FRONT_LEFT);
-  private final SwerveModule _frontRight = new SwerveModule(Constants.CAN.DRIVE_FRONT_RIGHT, Constants.CAN.ROT_FRONT_RIGHT);
-  private final SwerveModule _backRight = new SwerveModule(Constants.CAN.DRIVE_BACK_RIGHT, Constants.CAN.ROT_BACK_RIGHT);
-  private final SwerveModule _backLeft = new SwerveModule(Constants.CAN.DRIVE_BACK_LEFT, Constants.CAN.ROT_BACK_LEFT);
+  // TODO: Get angle offset for each module (zero each one)
+  private final SwerveModule _frontLeft = new SwerveModule(Constants.CAN.DRIVE_FRONT_LEFT, Constants.CAN.ROT_FRONT_LEFT, Constants.CAN.ENC_FRONT_LEFT, -92);
+  private final SwerveModule _frontRight = new SwerveModule(Constants.CAN.DRIVE_FRONT_RIGHT, Constants.CAN.ROT_FRONT_RIGHT, Constants.CAN.ENC_FRONT_RIGHT, -53);
+  private final SwerveModule _backRight = new SwerveModule(Constants.CAN.DRIVE_BACK_RIGHT, Constants.CAN.ROT_BACK_RIGHT, Constants.CAN.ENC_BACK_RIGHT, 0);
+  private final SwerveModule _backLeft = new SwerveModule(Constants.CAN.DRIVE_BACK_LEFT, Constants.CAN.ROT_BACK_LEFT, Constants.CAN.ENC_BACK_LEFT, 0);
 
   /** Creates a new SwerveDrive. */
   public SwerveDrive() {
@@ -21,6 +23,12 @@ public class SwerveDrive extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    SmartDashboard.putNumber("Front Left", _frontLeft.getAngle());
+    SmartDashboard.putNumber("Front Right", _frontRight.getAngle());
+    SmartDashboard.putNumber("Back Right", _backRight.getAngle());
+    SmartDashboard.putNumber("Back Left", _backLeft.getAngle());
+
+    SmartDashboard.putNumber("Front Right Speed", _frontRight.getDriveVelocity());
   }
 
   /**
@@ -29,8 +37,8 @@ public class SwerveDrive extends SubsystemBase {
   public void driveTest(double speed) {
     _frontLeft.drive(speed);
     _frontRight.drive(speed);
-    _backLeft.drive(speed);
     _backRight.drive(speed);
+    _backLeft.drive(speed);
   }
 
   /**
@@ -39,7 +47,7 @@ public class SwerveDrive extends SubsystemBase {
   public void rotateTest(double speed) {
     _frontLeft.rotate(speed);
     _frontRight.rotate(speed);
-    _backLeft.rotate(speed);
     _backRight.rotate(speed);
+    _backLeft.rotate(speed);
   }
 }
