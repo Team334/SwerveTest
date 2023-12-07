@@ -47,7 +47,7 @@ public class SwerveDrive extends SubsystemBase {
    */
   public void rotateTest(double speed) {
     // _frontLeft.rotate(speed);
-    _frontRight.rotate(speed);
+    // _frontRight.rotate(speed);
     // _backRight.rotate(speed);
     // _backLeft.rotate(speed);
   }

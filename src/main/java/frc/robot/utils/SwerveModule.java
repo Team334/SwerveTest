@@ -3,12 +3,16 @@ package frc.robot.utils;
 
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.sensors.AbsoluteSensorRange;
 import com.ctre.phoenix.sensors.CANCoder;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.wpilibj.RobotController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 
 public class SwerveModule {
@@ -28,7 +32,10 @@ public class SwerveModule {
         _encoder.configMagnetOffset(angleOffset, Constants.CAN.CAN_TIMEOUT);
         _encoder.configAbsoluteSensorRange(AbsoluteSensorRange.Signed_PlusMinus180, Constants.CAN.CAN_TIMEOUT);
 
-        _rotationController = new PIDController(0, 0, 0);
+        _rotationController = new PIDController(0.007, 0, 0);
+        _rotationController.enableContinuousInput(-180, 180);
+
+        // SmartDashboard.putData("PID CONTROLLER", _rotationController);
 
         TalonFXConfig.configureFalcon(_driveMotor);
         TalonFXConfig.configureFalcon(_rotationMotor);
@@ -59,6 +66,13 @@ public class SwerveModule {
 
     public void setState(SwerveModuleState state) {
         // TODO: TEST THAT THIS WORKS
-        _driveMotor.set(TalonFXControlMode.PercentOutput, (state.speedMetersPerSecond / Constants.Speeds.SWERVE_DRIVE_MAX_SPEED) * Constants.Speeds.SWERVE_DRIVE_SPEED);        
+        System.out.println(state.angle.getDegrees());
+
+        _rotationMotor.set(
+            TalonFXControlMode.PercentOutput,
+            (MathUtil.clamp(_rotationController.calculate(getAngle(), state.angle.getDegrees()), -1, 1) / RobotController.getBatteryVoltage())
+        );
+
+        // _driveMotor.set(TalonFXControlMode.PercentOutput, (state.speedMetersPerSecond / Constants.Speeds.SWERVE_DRIVE_MAX_SPEED) * Constants.Speeds.SWERVE_DRIVE_SPEED);
     }
 }

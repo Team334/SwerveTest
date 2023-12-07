@@ -39,7 +39,7 @@ public class TestModule extends CommandBase {
   public void execute() {
     // _swerveDrive.driveTest(_getLeft.getAsDouble() * Constants.Speeds.SWERVE_DRIVE_SPEED);
     _swerveDrive.rotateTest(_getRight.getAsDouble() * Constants.Speeds.SWERVE_DRIVE_SPEED);
-    _swerveDrive.stateTest(new SwerveModuleState(_getLeft.getAsDouble() * Constants.Speeds.SWERVE_DRIVE_MAX_SPEED, new Rotation2d(0)));
+    _swerveDrive.stateTest(new SwerveModuleState(_getLeft.getAsDouble() * Constants.Speeds.SWERVE_DRIVE_MAX_SPEED, new Rotation2d(Math.toRadians(100))));
   }
 
   // Called once the command ends or is interrupted.
