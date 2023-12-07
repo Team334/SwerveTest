@@ -58,14 +58,7 @@ public class SwerveModule {
     }
 
     public void setState(SwerveModuleState state) {
-        // double state.speedMetersPerSecond
-
         // TODO: TEST THAT THIS WORKS
-        _driveMotor.set(TalonFXControlMode.PercentOutput, (state.speedMetersPerSecond / Constants.Speeds.SWERVE_DRIVE_MAX_SPEED) * Constants.Speeds.SWERVE_DRIVE_SPEED);
-    }
-
-    public SwerveModuleState getState() {
-        // TODO: Make this return a value and use radians?
-        return new SwerveModuleState();
+        _driveMotor.set(TalonFXControlMode.PercentOutput, (state.speedMetersPerSecond / Constants.Speeds.SWERVE_DRIVE_MAX_SPEED) * Constants.Speeds.SWERVE_DRIVE_SPEED);        
     }
 }
