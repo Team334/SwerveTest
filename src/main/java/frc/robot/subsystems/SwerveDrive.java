@@ -24,12 +24,13 @@ public class SwerveDrive extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber("Front Left", _frontLeft.getAngle());
-    SmartDashboard.putNumber("Front Right", _frontRight.getAngle());
-    SmartDashboard.putNumber("Back Right", _backRight.getAngle());
-    SmartDashboard.putNumber("Back Left", _backLeft.getAngle());
+    // SmartDashboard.putNumber("Front Left", _frontLeft.getAngle());
+    // SmartDashboard.putNumber("Front Right", _frontRight.getAngle());
+    // SmartDashboard.putNumber("Back Right", _backRight.getAngle());
+    // SmartDashboard.putNumber("Back Left", _backLeft.getAngle());
 
     SmartDashboard.putNumber("Front Right Speed", _frontRight.getDriveVelocity());
+    SmartDashboard.putNumber("Front Right Angle", _frontRight.getAngle());
   }
 
   /**
@@ -47,7 +48,7 @@ public class SwerveDrive extends SubsystemBase {
    */
   public void rotateTest(double speed) {
     // _frontLeft.rotate(speed);
-    // _frontRight.rotate(speed);
+    _frontRight.rotate(speed);
     // _backRight.rotate(speed);
     // _backLeft.rotate(speed);
   }

@@ -34,6 +34,7 @@ public class SwerveModule {
 
         _rotationController = new PIDController(0.007, 0, 0);
         _rotationController.enableContinuousInput(-180, 180);
+        _rotationController.setTolerance(1);
 
         // SmartDashboard.putData("PID CONTROLLER", _rotationController);
 
@@ -66,11 +67,13 @@ public class SwerveModule {
 
     public void setState(SwerveModuleState state) {
         // TODO: TEST THAT THIS WORKS
-        System.out.println(state.angle.getDegrees());
 
-        _rotationMotor.set(
-            TalonFXControlMode.PercentOutput,
-            (MathUtil.clamp(_rotationController.calculate(getAngle(), state.angle.getDegrees()), -1, 1) / RobotController.getBatteryVoltage())
+        state = SwerveModuleState.optimize(state, new Rotation2d(Math.toRadians(getAngle())));
+
+        double rotation_volts = -MathUtil.clamp(_rotationController.calculate(getAngle(), state.angle.getDegrees()), -0.5, 0.5);
+
+        rotate(
+            rotation_volts / RobotController.getBatteryVoltage()
         );
 
         // _driveMotor.set(TalonFXControlMode.PercentOutput, (state.speedMetersPerSecond / Constants.Speeds.SWERVE_DRIVE_MAX_SPEED) * Constants.Speeds.SWERVE_DRIVE_SPEED);
