@@ -6,7 +6,10 @@ package frc.robot.commands;
 
 import java.util.function.DoubleSupplier;
 
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.SwerveDrive;
 
 public class TestModule extends CommandBase {
@@ -34,8 +37,9 @@ public class TestModule extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    _swerveDrive.driveTest(_getLeft.getAsDouble() * .3);
-    _swerveDrive.rotateTest(_getRight.getAsDouble() * .3);
+    _swerveDrive.driveTest(_getLeft.getAsDouble() * Constants.Speeds.SWERVE_DRIVE_SPEED);
+    _swerveDrive.rotateTest(_getRight.getAsDouble() * Constants.Speeds.SWERVE_DRIVE_SPEED);
+    _swerveDrive.stateTest(new SwerveModuleState(_getLeft.getAsDouble() * Constants.Speeds.SWERVE_DRIVE_MAX_SPEED, new Rotation2d(Math.toRadians(150))));
   }
 
   // Called once the command ends or is interrupted.

@@ -21,7 +21,11 @@ public class TalonFXConfig {
     public static void configureFalcon(TalonFX falcon) {
         falcon.configFactoryDefault(Constants.CAN.CAN_TIMEOUT);
         falcon.configNeutralDeadband(0.01, Constants.CAN.CAN_TIMEOUT);
-        falcon.setNeutralMode(NeutralMode.Brake);
+        // falcon.setNeutralMode(NeutralMode.Brake);
+        falcon.setNeutralMode(NeutralMode.Coast);
+
+        falcon.configForwardSoftLimitEnable(false);
+        falcon.configReverseSoftLimitEnable(false);
 
         falcon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
         falcon.setSelectedSensorPosition(0);

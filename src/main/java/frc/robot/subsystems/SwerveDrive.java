@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -23,31 +24,36 @@ public class SwerveDrive extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber("Front Left", _frontLeft.getAngle());
-    SmartDashboard.putNumber("Front Right", _frontRight.getAngle());
-    SmartDashboard.putNumber("Back Right", _backRight.getAngle());
-    SmartDashboard.putNumber("Back Left", _backLeft.getAngle());
+    // SmartDashboard.putNumber("Front Left", _frontLeft.getAngle());
+    // SmartDashboard.putNumber("Front Right", _frontRight.getAngle());
+    // SmartDashboard.putNumber("Back Right", _backRight.getAngle());
+    // SmartDashboard.putNumber("Back Left", _backLeft.getAngle());
 
     SmartDashboard.putNumber("Front Right Speed", _frontRight.getDriveVelocity());
+    SmartDashboard.putNumber("Front Right Angle", _frontRight.getAngle());
   }
 
   /**
    * Calls drive method of each SwerveModule.
    */
   public void driveTest(double speed) {
-    _frontLeft.drive(speed);
+    // _frontLeft.drive(speed);
     _frontRight.drive(speed);
-    _backRight.drive(speed);
-    _backLeft.drive(speed);
+    // _backRight.drive(speed);
+    // _backLeft.drive(speed);
   }
 
   /**
    * Calls rotate method of each SwerveModule.
    */
   public void rotateTest(double speed) {
-    _frontLeft.rotate(speed);
+    // _frontLeft.rotate(speed);
     _frontRight.rotate(speed);
-    _backRight.rotate(speed);
-    _backLeft.rotate(speed);
+    // _backRight.rotate(speed);
+    // _backLeft.rotate(speed);
+  }
+
+  public void stateTest(SwerveModuleState state) {
+    _frontRight.setState(state);
   }
 }
