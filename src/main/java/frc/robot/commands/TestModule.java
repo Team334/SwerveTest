@@ -8,6 +8,7 @@ import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.SwerveDrive;
@@ -37,9 +38,10 @@ public class TestModule extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    _swerveDrive.driveTest(_getLeft.getAsDouble() * Constants.Speeds.SWERVE_DRIVE_SPEED);
-    // _swerveDrive.rotateTest(_getRight.getAsDouble() * Constants.Speeds.SWERVE_DRIVE_SPEED);
-    _swerveDrive.stateTest(new SwerveModuleState(_getLeft.getAsDouble() * Constants.Speeds.SWERVE_DRIVE_MAX_SPEED, new Rotation2d(Math.toRadians(150))));
+    _swerveDrive.stateTest(new SwerveModuleState(
+      SmartDashboard.getNumber("State Speed", 0),
+      new Rotation2d(Math.toRadians(SmartDashboard.getNumber("State Angle", 0)))
+    ));
   }
 
   // Called once the command ends or is interrupted.

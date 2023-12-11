@@ -23,9 +23,7 @@ public class SwerveModule {
 
     private final CANCoder _encoder;
 
-    private final boolean _encoderReversed;
-
-    public SwerveModule(int driveMotorId, int rotationMotorId, int encoderId, double angleOffset, boolean encoderReversed) {
+    public SwerveModule(int driveMotorId, int rotationMotorId, int encoderId, double angleOffset) {
         _driveMotor = new TalonFX(driveMotorId);
         _rotationMotor = new TalonFX(rotationMotorId);
 
@@ -36,9 +34,7 @@ public class SwerveModule {
 
         _rotationController = new PIDController(0.07, 0, 0);
         _rotationController.enableContinuousInput(-180, 180);
-        _rotationController.setTolerance(1);
-
-        _encoderReversed = encoderReversed;
+        _rotationController.setTolerance(0.5);
 
         // SmartDashboard.putData("PID CONTROLLER", _rotationController);
 
@@ -66,10 +62,6 @@ public class SwerveModule {
     }
 
     public double getAngle() {
-        if (_encoderReversed) {
-            return _encoder.getAbsolutePosition() * -1;
-        } 
-
         return _encoder.getAbsolutePosition();
     }
 
@@ -78,14 +70,14 @@ public class SwerveModule {
 
         state = SwerveModuleState.optimize(state, new Rotation2d(Math.toRadians(getAngle())));
 
-        double rotation_volts = MathUtil.clamp(_rotationController.calculate(getAngle(), state.angle.getDegrees()), -0.7, 0.7);
+        double rotation_volts = -MathUtil.clamp(_rotationController.calculate(getAngle(), state.angle.getDegrees()), -0.7, 0.7);
 
-        System.out.println(rotation_volts);
+        // System.out.println(rotation_volts);
 
         rotate(
             rotation_volts / RobotController.getBatteryVoltage()
         );
 
-        // _driveMotor.set(TalonFXControlMode.PercentOutput, (state.speedMetersPerSecond / Constants.Speeds.SWERVE_DRIVE_MAX_SPEED) * Constants.Speeds.SWERVE_DRIVE_SPEED);
+        _driveMotor.set(TalonFXControlMode.PercentOutput, (state.speedMetersPerSecond / Constants.Speeds.SWERVE_DRIVE_MAX_SPEED) * Constants.Speeds.SWERVE_DRIVE_SPEED);
     }
 }
