@@ -71,13 +71,12 @@ public class SwerveModule {
         state = SwerveModuleState.optimize(state, new Rotation2d(Math.toRadians(getAngle())));
 
         double rotation_volts = -MathUtil.clamp(_rotationController.calculate(getAngle(), state.angle.getDegrees()), -0.7, 0.7);
-
-        // System.out.println(rotation_volts);
+        double speed = MathUtil.clamp(state.speedMetersPerSecond, -Constants.Speeds.SWERVE_DRIVE_MAX_SPEED, Constants.Speeds.SWERVE_DRIVE_MAX_SPEED);
 
         rotate(
             rotation_volts / RobotController.getBatteryVoltage()
         );
 
-        _driveMotor.set(TalonFXControlMode.PercentOutput, (state.speedMetersPerSecond / Constants.Speeds.SWERVE_DRIVE_MAX_SPEED) * Constants.Speeds.SWERVE_DRIVE_SPEED);
+        _driveMotor.set(TalonFXControlMode.PercentOutput, (speed / Constants.Speeds.SWERVE_DRIVE_MAX_SPEED) * Constants.Speeds.SWERVE_DRIVE_SPEED);
     }
 }
