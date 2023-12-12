@@ -32,7 +32,7 @@ public class SwerveModule {
         _encoder.configMagnetOffset(angleOffset, Constants.CAN.CAN_TIMEOUT);
         _encoder.configAbsoluteSensorRange(AbsoluteSensorRange.Signed_PlusMinus180, Constants.CAN.CAN_TIMEOUT);
 
-        _rotationController = new PIDController(0.07, 0, 0);
+        _rotationController = new PIDController(0.1, 0, 0);
         _rotationController.enableContinuousInput(-180, 180);
         _rotationController.setTolerance(0.5);
 

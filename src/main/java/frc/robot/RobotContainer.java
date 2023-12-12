@@ -4,6 +4,9 @@
 
 package frc.robot;
 
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.SwerveModuleState;
+import frc.robot.commands.TeleopDrive;
 import frc.robot.commands.TestModule;
 import frc.robot.subsystems.SwerveDrive;
 
@@ -22,11 +25,11 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the trigger bindings
 
-    _swerveDrive.setDefaultCommand(new TestModule(_swerveDrive, _robotCtrl :: driveLeftY, _robotCtrl :: driveRightX));
+    // _swerveDrive.setDefaultCommand(new TestModule(_swerveDrive, _robotCtrl :: driveLeftY, _robotCtrl :: driveRightX));
+    _swerveDrive.setDefaultCommand(new TeleopDrive(_swerveDrive, _robotCtrl :: driveLeftX, _robotCtrl :: driveLeftY, _robotCtrl :: driveRightX));
 
     configureBindings();
   }
-
 
   private void configureBindings() {
 
