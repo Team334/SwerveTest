@@ -28,4 +28,12 @@ public class RobotCtrl {
     public double driveRightY() {
         return _driveFilterRightY.calculate(driveController.getRightY());
     }
+
+    public static double ApplyDeadband(double val, double deadband) {
+        if (Math.abs(val) > deadband) {
+            return val;
+        }
+
+        return 0;
+    }
 }

@@ -26,7 +26,7 @@ public class RobotContainer {
     // Configure the trigger bindings
 
     // _swerveDrive.setDefaultCommand(new TestModule(_swerveDrive, _robotCtrl :: driveLeftY, _robotCtrl :: driveRightX));
-    _swerveDrive.setDefaultCommand(new TeleopDrive(_swerveDrive, _robotCtrl :: driveLeftX, _robotCtrl :: driveLeftY, _robotCtrl :: driveRightX));
+    _swerveDrive.setDefaultCommand(new TeleopDrive(_swerveDrive, _robotCtrl :: driveRightX, _robotCtrl :: driveRightY, _robotCtrl :: driveLeftX));
 
     configureBindings();
   }

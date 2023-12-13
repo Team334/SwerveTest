@@ -55,9 +55,9 @@ public final class Constants {
     public static final double SWERVE_DRIVE_WHEEL_RADIUS = 0.1; // TODO: Get this value
 
     public static final SwerveDriveKinematics SWERVE_KINEMATICS = new SwerveDriveKinematics(
-      new Translation2d(-0.279, -0.292),
       new Translation2d(0.279, 0.292),
       new Translation2d(0.279, -0.292),
+      new Translation2d(-0.279, -0.292),
       new Translation2d(-0.279, 0.292)
     );
   }
