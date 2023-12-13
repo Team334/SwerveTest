@@ -49,6 +49,7 @@ public class TeleopDrive extends CommandBase {
     double ySpeed = RobotCtrl.ApplyDeadband(_ySpeed.getAsDouble(), 0.07);
     double rotationSpeed = RobotCtrl.ApplyDeadband(_rotationSpeed.getAsDouble(), 0.07);
 
+    // IMPORTANT: X-axis and Y-axis are flipped (based on wpilib coord system)
     ChassisSpeeds chassisSpeeds = new ChassisSpeeds(
       xSpeed * Constants.Speeds.SWERVE_DRIVE_MAX_SPEED,
       ySpeed * Constants.Speeds.SWERVE_DRIVE_MAX_SPEED,

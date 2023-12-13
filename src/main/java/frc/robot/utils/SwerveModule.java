@@ -32,7 +32,7 @@ public class SwerveModule {
         _encoder.configMagnetOffset(angleOffset, Constants.CAN.CAN_TIMEOUT);
         _encoder.configAbsoluteSensorRange(AbsoluteSensorRange.Signed_PlusMinus180, Constants.CAN.CAN_TIMEOUT);
 
-        _rotationController = new PIDController(0.1, 0, 0);
+        _rotationController = new PIDController(0.2, 0, 0);
         _rotationController.enableContinuousInput(-180, 180);
         _rotationController.setTolerance(0.5);
 
@@ -70,7 +70,7 @@ public class SwerveModule {
 
         state = SwerveModuleState.optimize(state, new Rotation2d(Math.toRadians(getAngle())));
 
-        double rotation_volts = -MathUtil.clamp(_rotationController.calculate(getAngle(), state.angle.getDegrees()), -0.7, 0.7);
+        double rotation_volts = -MathUtil.clamp(_rotationController.calculate(getAngle(), state.angle.getDegrees()), -1.5, 1.5);
         double speed = MathUtil.clamp(state.speedMetersPerSecond, -Constants.Speeds.SWERVE_DRIVE_MAX_SPEED, Constants.Speeds.SWERVE_DRIVE_MAX_SPEED);
 
         rotate(

@@ -45,7 +45,7 @@ public final class Constants {
     public static final double SWERVE_DRIVE_SPEED = 0.3;
 
     public static final double SWERVE_DRIVE_MAX_SPEED = 2.85; // TODO: Get this value
-    public static final double SWERVE_DRIVE_MAX_ANGULAR_SPEED = Math.PI;
+    public static final double SWERVE_DRIVE_MAX_ANGULAR_SPEED = Math.PI * 2;
   }
 
   public static class Physical {
@@ -55,10 +55,10 @@ public final class Constants {
     public static final double SWERVE_DRIVE_WHEEL_RADIUS = 0.1; // TODO: Get this value
 
     public static final SwerveDriveKinematics SWERVE_KINEMATICS = new SwerveDriveKinematics(
-      new Translation2d(0.279, 0.292),
-      new Translation2d(0.279, -0.292),
-      new Translation2d(-0.279, -0.292),
-      new Translation2d(-0.279, 0.292)
+      new Translation2d(0.292, 0.292),
+      new Translation2d(0.292, -0.292),
+      new Translation2d(-0.292, -0.292),
+      new Translation2d(-0.292, 0.292)
     );
   }
 
