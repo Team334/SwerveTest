@@ -45,8 +45,8 @@ public class TeleopDrive extends CommandBase {
   @Override
   public void execute() {
     // apply controller deadband
-    double xSpeed = RobotCtrl.ApplyDeadband(_xSpeed.getAsDouble(), 0.07);
-    double ySpeed = RobotCtrl.ApplyDeadband(_ySpeed.getAsDouble(), 0.07);
+    double xSpeed = RobotCtrl.ApplyDeadband(_xSpeed.getAsDouble(), 0.1);
+    double ySpeed = RobotCtrl.ApplyDeadband(_ySpeed.getAsDouble(), 0.1);
     double rotationSpeed = RobotCtrl.ApplyDeadband(_rotationSpeed.getAsDouble(), 0.07);
 
     // IMPORTANT: X-axis and Y-axis are flipped (based on wpilib coord system)
