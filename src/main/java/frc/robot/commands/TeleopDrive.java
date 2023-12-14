@@ -52,7 +52,8 @@ public class TeleopDrive extends CommandBase {
     // IMPORTANT: X-axis and Y-axis are flipped (based on wpilib coord system)
     ChassisSpeeds chassisSpeeds = new ChassisSpeeds(
       xSpeed * Constants.Speeds.SWERVE_DRIVE_MAX_SPEED,
-      ySpeed * Constants.Speeds.SWERVE_DRIVE_MAX_SPEED,
+      // ySpeed * Constants.Speeds.SWERVE_DRIVE_MAX_SPEED,
+      0,
       rotationSpeed * Constants.Speeds.SWERVE_DRIVE_MAX_ANGULAR_SPEED
     );
 

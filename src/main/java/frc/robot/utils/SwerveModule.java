@@ -3,7 +3,6 @@ package frc.robot.utils;
 
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.sensors.AbsoluteSensorRange;
 import com.ctre.phoenix.sensors.CANCoder;
 
@@ -12,7 +11,6 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.RobotController;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 
 public class SwerveModule {
@@ -35,8 +33,6 @@ public class SwerveModule {
         _rotationController = new PIDController(0.2, 0, 0);
         _rotationController.enableContinuousInput(-180, 180);
         _rotationController.setTolerance(0.5);
-
-        // SmartDashboard.putData("PID CONTROLLER", _rotationController);
 
         TalonFXConfig.configureFalcon(_driveMotor);
         TalonFXConfig.configureFalcon(_rotationMotor);
