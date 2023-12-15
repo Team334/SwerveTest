@@ -63,10 +63,10 @@ public final class Constants {
   }
 
   public static class Offsets {
-    public static final double ENCODER_FRONT_LEFT = -92;
-    public static final double ENCODER_FRONT_RIGHT = -53;
-    public static final double ENCODER_BACK_RIGHT = 9;
-    public static final double ENCODER_BACK_LEFT = 42;
+    public static final double ENCODER_FRONT_LEFT = -93;
+    public static final double ENCODER_FRONT_RIGHT = -59;
+    public static final double ENCODER_BACK_RIGHT = 12;
+    public static final double ENCODER_BACK_LEFT = 43;
    
     
   }

@@ -32,7 +32,7 @@ public class SwerveModule {
 
         _rotationController = new PIDController(0.2, 0, 0);
         _rotationController.enableContinuousInput(-180, 180);
-        _rotationController.setTolerance(0.5);
+        // _rotationController.setTolerance(0.5);
 
         TalonFXConfig.configureFalcon(_driveMotor);
         TalonFXConfig.configureFalcon(_rotationMotor);
