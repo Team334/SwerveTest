@@ -4,11 +4,13 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.utils.SwerveModule;
+import frc.robot.utils.BNO055;
 
 public class SwerveDrive extends SubsystemBase {
   // TODO: Get angle offset for each module (zero each one)
@@ -16,9 +18,12 @@ public class SwerveDrive extends SubsystemBase {
   private final SwerveModule _frontRight = new SwerveModule(Constants.CAN.DRIVE_FRONT_RIGHT, Constants.CAN.ROT_FRONT_RIGHT, Constants.CAN.ENC_FRONT_RIGHT, Constants.Offsets.ENCODER_FRONT_RIGHT);
   private final SwerveModule _backRight = new SwerveModule(Constants.CAN.DRIVE_BACK_RIGHT, Constants.CAN.ROT_BACK_RIGHT, Constants.CAN.ENC_BACK_RIGHT, Constants.Offsets.ENCODER_BACK_RIGHT);
   private final SwerveModule _backLeft = new SwerveModule(Constants.CAN.DRIVE_BACK_LEFT, Constants.CAN.ROT_BACK_LEFT, Constants.CAN.ENC_BACK_LEFT, Constants.Offsets.ENCODER_BACK_LEFT);
+  private final BNO055 _gyro;
+  
 
   /** Creates a new SwerveDrive. */
   public SwerveDrive() {
+    _gyro = BNO055.getInstance(BNO055.opmode_t.OPERATION_MODE_IMUPLUS, BNO055.vector_type_t.VECTOR_EULER);
   }
 
   @Override
@@ -33,6 +38,8 @@ public class SwerveDrive extends SubsystemBase {
     SmartDashboard.putNumber("Front Right Speed", _frontRight.getDriveVelocity());
     SmartDashboard.putNumber("Back Right Speed", _backRight.getDriveVelocity());
     SmartDashboard.putNumber("Back Left Speed", _backLeft.getDriveVelocity());
+
+    SmartDashboard.putNumber("Gyro", getHeading());
   }
 
   /**
@@ -73,5 +80,17 @@ public class SwerveDrive extends SubsystemBase {
     _frontRight.setState(state);
     _backRight.setState(state);
     _backLeft.setState(state);
+  }
+
+  public void resetGyro() {
+    // IDK
+  }
+
+  public double getHeading() {
+    return Math.IEEEremainder(_gyro.getHeading(), 360);
+  }
+
+  public Rotation2d getRotation2d() {
+    return Rotation2d.fromDegrees(getHeading());
   }
 }

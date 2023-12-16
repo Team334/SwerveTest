@@ -22,6 +22,8 @@ public class TeleopDrive extends CommandBase {
 
   private final DoubleSupplier _rotationSpeed;
 
+  private final boolean _fieldOriented = false;
+
   /** Creates a new TeleopDrive. */
   public TeleopDrive(SwerveDrive swerveDrive, DoubleSupplier xSpeed, DoubleSupplier ySpeed, DoubleSupplier rotationSpeed) {
     _swerveDrive = swerveDrive;
@@ -38,7 +40,6 @@ public class TeleopDrive extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    // _swerveDrive.stateTest(new SwerveModuleState(0, new Rotation2d(Math.toRadians(0))));
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -50,12 +51,21 @@ public class TeleopDrive extends CommandBase {
     double rotationSpeed = RobotCtrl.ApplyDeadband(_rotationSpeed.getAsDouble(), 0.07);
 
     // IMPORTANT: X-axis and Y-axis are flipped (based on wpilib coord system)
-    ChassisSpeeds chassisSpeeds = new ChassisSpeeds(
-      xSpeed * Constants.Speeds.SWERVE_DRIVE_MAX_SPEED,
-      ySpeed * Constants.Speeds.SWERVE_DRIVE_MAX_SPEED,
-      // 0,
-      rotationSpeed * Constants.Speeds.SWERVE_DRIVE_MAX_ANGULAR_SPEED
-    );
+    
+    ChassisSpeeds chassisSpeeds;
+
+    if (_fieldOriented) {
+      chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed * Constants.Speeds.SWERVE_DRIVE_MAX_SPEED, ySpeed * Constants.Speeds.SWERVE_DRIVE_MAX_SPEED, rotationSpeed * Constants.Speeds.SWERVE_DRIVE_MAX_ANGULAR_SPEED, _swerveDrive.getRotation2d());
+    } 
+    
+    else {
+      chassisSpeeds = new ChassisSpeeds(
+        xSpeed * Constants.Speeds.SWERVE_DRIVE_MAX_SPEED,
+        ySpeed * Constants.Speeds.SWERVE_DRIVE_MAX_SPEED,
+        // 0,
+        rotationSpeed * Constants.Speeds.SWERVE_DRIVE_MAX_ANGULAR_SPEED
+      );
+    }
 
     SwerveModuleState[] moduleStates = Constants.Physical.SWERVE_KINEMATICS.toSwerveModuleStates(chassisSpeeds);
 

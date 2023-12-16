@@ -65,10 +65,9 @@ public final class Constants {
   public static class Offsets {
     public static final double ENCODER_FRONT_LEFT = -93;
     public static final double ENCODER_FRONT_RIGHT = -59;
-    public static final double ENCODER_BACK_RIGHT = 12;
+    public static final double ENCODER_BACK_RIGHT = 13;
     public static final double ENCODER_BACK_LEFT = 43;
    
-    
   }
 
   public static final int DRIVER_CONTROLLER = 0;

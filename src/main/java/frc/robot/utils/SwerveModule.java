@@ -17,6 +17,7 @@ public class SwerveModule {
     private final TalonFX _driveMotor;
     private final TalonFX _rotationMotor;
 
+    private final PIDController _driveController;
     private final PIDController _rotationController;
 
     private final CANCoder _encoder;
@@ -30,6 +31,8 @@ public class SwerveModule {
         _encoder.configMagnetOffset(angleOffset, Constants.CAN.CAN_TIMEOUT);
         _encoder.configAbsoluteSensorRange(AbsoluteSensorRange.Signed_PlusMinus180, Constants.CAN.CAN_TIMEOUT);
 
+        _driveController = new PIDController(0, 0, 0);
+
         _rotationController = new PIDController(0.2, 0, 0);
         _rotationController.enableContinuousInput(-180, 180);
         // _rotationController.setTolerance(0.5);
@@ -40,7 +43,6 @@ public class SwerveModule {
 
     public void drive(double speed) {
         _driveMotor.set(TalonFXControlMode.PercentOutput, speed);
-        // _driveMotor.set(TalonFXControlMode.Velocity, speed);
     }
 
     public void rotate(double speed) {
