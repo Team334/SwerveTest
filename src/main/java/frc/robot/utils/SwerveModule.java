@@ -31,11 +31,10 @@ public class SwerveModule {
         _encoder.configMagnetOffset(angleOffset, Constants.CAN.CAN_TIMEOUT);
         _encoder.configAbsoluteSensorRange(AbsoluteSensorRange.Signed_PlusMinus180, Constants.CAN.CAN_TIMEOUT);
 
-        _driveController = new PIDController(0, 0, 0);
+        _driveController = new PIDController(0.1, 0, 0);
 
         _rotationController = new PIDController(0.2, 0, 0);
         _rotationController.enableContinuousInput(-180, 180);
-        // _rotationController.setTolerance(0.5);
 
         TalonFXConfig.configureFalcon(_driveMotor);
         TalonFXConfig.configureFalcon(_rotationMotor);
@@ -70,6 +69,8 @@ public class SwerveModule {
 
         double rotation_volts = -MathUtil.clamp(_rotationController.calculate(getAngle(), state.angle.getDegrees()), -1.5, 1.5);
         double speed = MathUtil.clamp(state.speedMetersPerSecond, -Constants.Speeds.SWERVE_DRIVE_MAX_SPEED, Constants.Speeds.SWERVE_DRIVE_MAX_SPEED);
+
+        // speed += _driveController.calculate(getDriveVelocity(), state.speedMetersPerSecond);
 
         rotate(
             rotation_volts / RobotController.getBatteryVoltage()
