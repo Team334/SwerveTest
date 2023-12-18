@@ -23,18 +23,14 @@ public class TeleopDrive extends CommandBase {
 
   private final DoubleSupplier _rotationSpeed;
 
-  private final BooleanSupplier _toggleOrient;
-
   /** Creates a new TeleopDrive. */
-  public TeleopDrive(SwerveDrive swerveDrive, DoubleSupplier xSpeed, DoubleSupplier ySpeed, DoubleSupplier rotationSpeed, BooleanSupplier toggleOrient) {
+  public TeleopDrive(SwerveDrive swerveDrive, DoubleSupplier xSpeed, DoubleSupplier ySpeed, DoubleSupplier rotationSpeed) {
     _swerveDrive = swerveDrive;
 
     _xSpeed = xSpeed;
     _ySpeed = ySpeed;
 
     _rotationSpeed = rotationSpeed;
-
-    _toggleOrient = toggleOrient;
 
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(swerveDrive);
@@ -57,7 +53,7 @@ public class TeleopDrive extends CommandBase {
     
     ChassisSpeeds chassisSpeeds;
 
-    if (_toggleOrient.getAsBoolean()) {
+    if (_swerveDrive.getFieldOrientated()) {
       chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed * Constants.Speeds.SWERVE_DRIVE_MAX_SPEED, ySpeed * Constants.Speeds.SWERVE_DRIVE_MAX_SPEED, rotationSpeed * Constants.Speeds.SWERVE_DRIVE_MAX_ANGULAR_SPEED, _swerveDrive.getRotation2d());
     } 
     

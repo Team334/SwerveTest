@@ -20,6 +20,7 @@ public class SwerveDrive extends SubsystemBase {
   private final SwerveModule _backLeft = new SwerveModule(Constants.CAN.DRIVE_BACK_LEFT, Constants.CAN.ROT_BACK_LEFT, Constants.CAN.ENC_BACK_LEFT, Constants.Offsets.ENCODER_BACK_LEFT, false);
   private final BNO055 _gyro;
   
+  private boolean _fieldOrientated = false;
 
   /** Creates a new SwerveDrive. */
   public SwerveDrive() {
@@ -40,6 +41,12 @@ public class SwerveDrive extends SubsystemBase {
     SmartDashboard.putNumber("Back Left Speed", _backLeft.getDriveVelocity());
 
     SmartDashboard.putNumber("Gyro", getHeading());
+
+    SmartDashboard.putBoolean("Field Orientated", _fieldOrientated);
+  }
+
+  public boolean getFieldOrientated() {
+    return _fieldOrientated;
   }
 
   /**
@@ -92,5 +99,9 @@ public class SwerveDrive extends SubsystemBase {
 
   public Rotation2d getRotation2d() {
     return Rotation2d.fromDegrees(getHeading());
+  }
+
+  public void toggleOrient() {
+    _fieldOrientated = !_fieldOrientated;
   }
 }

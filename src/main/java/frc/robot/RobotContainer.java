@@ -8,6 +8,7 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import frc.robot.commands.TeleopDrive;
 import frc.robot.commands.TestModule;
+import frc.robot.commands.ToggleSwerveOrient;
 import frc.robot.subsystems.SwerveDrive;
 
 /**
@@ -26,12 +27,12 @@ public class RobotContainer {
     // Configure the trigger bindings
 
     // _swerveDrive.setDefaultCommand(new TestModule(_swerveDrive, _robotCtrl :: driveLeftY, _robotCtrl :: driveRightX));
-    _swerveDrive.setDefaultCommand(new TeleopDrive(_swerveDrive, () -> -_robotCtrl.driveLeftY(), () -> -_robotCtrl.driveLeftX(), () -> -_robotCtrl.driveRightX(), () -> true));
+    _swerveDrive.setDefaultCommand(new TeleopDrive(_swerveDrive, () -> -_robotCtrl.driveLeftY(), () -> -_robotCtrl.driveLeftX(), () -> -_robotCtrl.driveRightX()));
 
     configureBindings();
   }
 
   private void configureBindings() {
-
+    _robotCtrl.driveController.R1().onTrue(new ToggleSwerveOrient(_swerveDrive));
   }
 }
