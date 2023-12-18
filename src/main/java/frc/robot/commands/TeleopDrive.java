@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -22,16 +23,18 @@ public class TeleopDrive extends CommandBase {
 
   private final DoubleSupplier _rotationSpeed;
 
-  private final boolean _fieldOriented = false;
+  private final BooleanSupplier _toggleOrient;
 
   /** Creates a new TeleopDrive. */
-  public TeleopDrive(SwerveDrive swerveDrive, DoubleSupplier xSpeed, DoubleSupplier ySpeed, DoubleSupplier rotationSpeed) {
+  public TeleopDrive(SwerveDrive swerveDrive, DoubleSupplier xSpeed, DoubleSupplier ySpeed, DoubleSupplier rotationSpeed, BooleanSupplier toggleOrient) {
     _swerveDrive = swerveDrive;
 
     _xSpeed = xSpeed;
     _ySpeed = ySpeed;
 
     _rotationSpeed = rotationSpeed;
+
+    _toggleOrient = toggleOrient;
 
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(swerveDrive);
@@ -54,7 +57,7 @@ public class TeleopDrive extends CommandBase {
     
     ChassisSpeeds chassisSpeeds;
 
-    if (_fieldOriented) {
+    if (_toggleOrient.getAsBoolean()) {
       chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed * Constants.Speeds.SWERVE_DRIVE_MAX_SPEED, ySpeed * Constants.Speeds.SWERVE_DRIVE_MAX_SPEED, rotationSpeed * Constants.Speeds.SWERVE_DRIVE_MAX_ANGULAR_SPEED, _swerveDrive.getRotation2d());
     } 
     

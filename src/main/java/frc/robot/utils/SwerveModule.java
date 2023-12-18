@@ -22,7 +22,9 @@ public class SwerveModule {
 
     private final CANCoder _encoder;
 
-    public SwerveModule(int driveMotorId, int rotationMotorId, int encoderId, double angleOffset) {
+    private final boolean _reverseDrive;
+
+    public SwerveModule(int driveMotorId, int rotationMotorId, int encoderId, double angleOffset, boolean reverseDrive) {
         _driveMotor = new TalonFX(driveMotorId);
         _rotationMotor = new TalonFX(rotationMotorId);
 
@@ -35,6 +37,8 @@ public class SwerveModule {
 
         _rotationController = new PIDController(0.2, 0, 0);
         _rotationController.enableContinuousInput(-180, 180);
+
+        _reverseDrive = reverseDrive;
 
         TalonFXConfig.configureFalcon(_driveMotor);
         TalonFXConfig.configureFalcon(_rotationMotor);
@@ -70,12 +74,12 @@ public class SwerveModule {
         double rotation_volts = -MathUtil.clamp(_rotationController.calculate(getAngle(), state.angle.getDegrees()), -1.5, 1.5);
         double speed = MathUtil.clamp(state.speedMetersPerSecond, -Constants.Speeds.SWERVE_DRIVE_MAX_SPEED, Constants.Speeds.SWERVE_DRIVE_MAX_SPEED);
 
-        // speed += _driveController.calculate(getDriveVelocity(), state.speedMetersPerSecond);
+        speed += _driveController.calculate(getDriveVelocity(), state.speedMetersPerSecond);
 
         rotate(
             rotation_volts / RobotController.getBatteryVoltage()
         );
 
-        _driveMotor.set(TalonFXControlMode.PercentOutput, (speed / Constants.Speeds.SWERVE_DRIVE_MAX_SPEED) * Constants.Speeds.SWERVE_DRIVE_SPEED);
+        _driveMotor.set(TalonFXControlMode.PercentOutput, (_reverseDrive ? -1 : 1) * (speed / Constants.Speeds.SWERVE_DRIVE_MAX_SPEED) * Constants.Speeds.SWERVE_DRIVE_SPEED);
     }
 }
