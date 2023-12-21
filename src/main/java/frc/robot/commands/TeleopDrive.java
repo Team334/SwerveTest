@@ -4,19 +4,17 @@
 
 package frc.robot.commands;
 
-import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.RobotCtrl;
-import frc.robot.subsystems.SwerveDrive;
+import frc.robot.subsystems.SwerveDriveSubsystem;
 
 public class TeleopDrive extends CommandBase {
-  private final SwerveDrive _swerveDrive;
+  private final SwerveDriveSubsystem _swerveDrive;
 
   private final DoubleSupplier _xSpeed;
   private final DoubleSupplier _ySpeed;
@@ -24,7 +22,7 @@ public class TeleopDrive extends CommandBase {
   private final DoubleSupplier _rotationSpeed;
 
   /** Creates a new TeleopDrive. */
-  public TeleopDrive(SwerveDrive swerveDrive, DoubleSupplier xSpeed, DoubleSupplier ySpeed, DoubleSupplier rotationSpeed) {
+  public TeleopDrive(SwerveDriveSubsystem swerveDrive, DoubleSupplier xSpeed, DoubleSupplier ySpeed, DoubleSupplier rotationSpeed) {
     _swerveDrive = swerveDrive;
 
     _xSpeed = xSpeed;

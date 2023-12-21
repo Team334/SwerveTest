@@ -12,18 +12,19 @@ import frc.robot.Constants;
 import frc.robot.utils.SwerveModule;
 import frc.robot.utils.BNO055;
 
-public class SwerveDrive extends SubsystemBase {
+public class SwerveDriveSubsystem extends SubsystemBase {
   // TODO: Get angle offset for each module (zero each one)
   private final SwerveModule _frontLeft = new SwerveModule(Constants.CAN.DRIVE_FRONT_LEFT, Constants.CAN.ROT_FRONT_LEFT, Constants.CAN.ENC_FRONT_LEFT, Constants.Offsets.ENCODER_FRONT_LEFT, true);
   private final SwerveModule _frontRight = new SwerveModule(Constants.CAN.DRIVE_FRONT_RIGHT, Constants.CAN.ROT_FRONT_RIGHT, Constants.CAN.ENC_FRONT_RIGHT, Constants.Offsets.ENCODER_FRONT_RIGHT, false);
   private final SwerveModule _backRight = new SwerveModule(Constants.CAN.DRIVE_BACK_RIGHT, Constants.CAN.ROT_BACK_RIGHT, Constants.CAN.ENC_BACK_RIGHT, Constants.Offsets.ENCODER_BACK_RIGHT, false);
   private final SwerveModule _backLeft = new SwerveModule(Constants.CAN.DRIVE_BACK_LEFT, Constants.CAN.ROT_BACK_LEFT, Constants.CAN.ENC_BACK_LEFT, Constants.Offsets.ENCODER_BACK_LEFT, false);
+
   private final BNO055 _gyro;
   
   private boolean _fieldOrientated = false;
 
   /** Creates a new SwerveDrive. */
-  public SwerveDrive() {
+  public SwerveDriveSubsystem() {
     _gyro = BNO055.getInstance(BNO055.opmode_t.OPERATION_MODE_IMUPLUS, BNO055.vector_type_t.VECTOR_EULER);
   }
 

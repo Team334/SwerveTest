@@ -5,14 +5,14 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.SwerveDrive;
+import frc.robot.subsystems.SwerveDriveSubsystem;
 
 public class ToggleSwerveOrient extends CommandBase {
-  private final SwerveDrive _swerveDrive;
+  private final SwerveDriveSubsystem _swerveDrive;
 
 
   /** Creates a new ToggleSwerveOrient. */
-  public ToggleSwerveOrient(SwerveDrive swerveDrive) {
+  public ToggleSwerveOrient(SwerveDriveSubsystem swerveDrive) {
     // Use addRequirements() here to declare subsystem dependencies.
     _swerveDrive = swerveDrive;
 
