@@ -9,6 +9,7 @@ import com.ctre.phoenix.sensors.CANCoder;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.RobotController;
 import frc.robot.Constants;
@@ -60,6 +61,11 @@ public class SwerveModule {
         // TODO: CONFIRM THE CONSTANT VALUES
         // return the speed of the swerve wheel itself (talon rps times gear ratio time wheel size)
         return (talon_rps / Constants.Physical.SWERVE_DRIVE_GEAR_RATIO) * wheel_circumference;
+    }
+
+    // TODO: make this actually work
+    public SwerveModulePosition getPosition() {
+        return new SwerveModulePosition();
     }
 
     public double getAngle() {

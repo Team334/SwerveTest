@@ -45,7 +45,7 @@ public final class Constants {
     public static final double SWERVE_DRIVE_SPEED = 0.3;
 
     public static final double SWERVE_DRIVE_MAX_SPEED = 2.85; // TODO: Get this value
-    public static final double SWERVE_DRIVE_MAX_ANGULAR_SPEED = Math.PI * 2;
+    public static final double SWERVE_DRIVE_MAX_ANGULAR_SPEED = Math.PI * 2; // TODO: Get this value
   }
 
   public static class Physical {
