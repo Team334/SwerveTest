@@ -11,10 +11,10 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.RobotCtrl;
-import frc.robot.subsystems.SwerveDrive;
+import frc.robot.subsystems.SwerveDriveSubsystem;
 
 public class TeleopDrive extends CommandBase {
-  private final SwerveDrive _swerveDrive;
+  private final SwerveDriveSubsystem _swerveDrive;
 
   private final DoubleSupplier _xSpeed;
   private final DoubleSupplier _ySpeed;
@@ -22,7 +22,7 @@ public class TeleopDrive extends CommandBase {
   private final DoubleSupplier _rotationSpeed;
 
   /** Creates a new TeleopDrive. */
-  public TeleopDrive(SwerveDrive swerveDrive, DoubleSupplier xSpeed, DoubleSupplier ySpeed, DoubleSupplier rotationSpeed) {
+  public TeleopDrive(SwerveDriveSubsystem swerveDrive, DoubleSupplier xSpeed, DoubleSupplier ySpeed, DoubleSupplier rotationSpeed) {
     _swerveDrive = swerveDrive;
 
     _xSpeed = xSpeed;
@@ -52,7 +52,7 @@ public class TeleopDrive extends CommandBase {
     ChassisSpeeds chassisSpeeds;
 
     if (_swerveDrive.getFieldOrientated()) {
-      chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed * Constants.Speeds.SWERVE_DRIVE_MAX_SPEED, ySpeed * Constants.Speeds.SWERVE_DRIVE_MAX_SPEED, rotationSpeed * Constants.Speeds.SWERVE_DRIVE_MAX_ANGULAR_SPEED, _swerveDrive.getRotation2d());
+      chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed * Constants.Speeds.SWERVE_DRIVE_MAX_SPEED, ySpeed * Constants.Speeds.SWERVE_DRIVE_MAX_SPEED, rotationSpeed * Constants.Speeds.SWERVE_DRIVE_MAX_ANGULAR_SPEED, _swerveDrive.getHeading());
     } 
     
     else {

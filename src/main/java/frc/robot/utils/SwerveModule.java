@@ -9,6 +9,7 @@ import com.ctre.phoenix.sensors.CANCoder;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -59,6 +60,11 @@ public class SwerveModule {
 
         // return the speed of the drive wheel itself (talon rps times gear ratio time wheel size) in m/s
         return (talon_rps / Constants.Physical.SWERVE_DRIVE_GEAR_RATIO) * wheel_circumference;
+    }
+
+    // TODO: make this actually work
+    public SwerveModulePosition getPosition() {
+        return new SwerveModulePosition();
     }
 
     public double getAngle() {

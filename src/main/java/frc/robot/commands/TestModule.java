@@ -10,17 +10,16 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.subsystems.SwerveDrive;
+import frc.robot.subsystems.SwerveDriveSubsystem;
 
 public class TestModule extends CommandBase {
   private final DoubleSupplier _getLeft;
   private final DoubleSupplier _getRight;
 
-  private final SwerveDrive _swerveDrive;
+  private final SwerveDriveSubsystem _swerveDrive;
 
   /** Creates a new TestModule. */
-  public TestModule(SwerveDrive swerveDrive, DoubleSupplier getLeft, DoubleSupplier getRight) {
+  public TestModule(SwerveDriveSubsystem swerveDrive, DoubleSupplier getLeft, DoubleSupplier getRight) {
     // Use addRequirements() here to declare subsystem dependencies.
 
     _swerveDrive = swerveDrive;
