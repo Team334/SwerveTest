@@ -49,6 +49,10 @@ public class SwerveDrive extends SubsystemBase {
     return _fieldOrientated;
   }
 
+  public void toggleOrient() {
+    _fieldOrientated = !_fieldOrientated;
+  }
+
   /**
    * Sets the state of each SwerveModule through an array.
    */
@@ -99,9 +103,5 @@ public class SwerveDrive extends SubsystemBase {
 
   public Rotation2d getRotation2d() {
     return Rotation2d.fromDegrees(getHeading());
-  }
-
-  public void toggleOrient() {
-    _fieldOrientated = !_fieldOrientated;
   }
 }

@@ -11,6 +11,7 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.RobotController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 
 public class SwerveModule {
@@ -55,10 +56,8 @@ public class SwerveModule {
     public double getDriveVelocity() {
         double talon_rps = (_driveMotor.getSelectedSensorVelocity() / 2048) * 10;
         double wheel_circumference = 2 * Math.PI * Constants.Physical.SWERVE_DRIVE_WHEEL_RADIUS;
-        
-        // WHEEL ROTATIONS PER SECOND
-        // TODO: CONFIRM THE CONSTANT VALUES
-        // return the speed of the swerve wheel itself (talon rps times gear ratio time wheel size)
+
+        // return the speed of the drive wheel itself (talon rps times gear ratio time wheel size) in m/s
         return (talon_rps / Constants.Physical.SWERVE_DRIVE_GEAR_RATIO) * wheel_circumference;
     }
 
@@ -68,18 +67,16 @@ public class SwerveModule {
 
     public void setState(SwerveModuleState state) {
         // TODO: TEST THAT THIS WORKS
-
         state = SwerveModuleState.optimize(state, new Rotation2d(Math.toRadians(getAngle())));
 
         double rotation_volts = -MathUtil.clamp(_rotationController.calculate(getAngle(), state.angle.getDegrees()), -1.5, 1.5);
+
         double speed = MathUtil.clamp(state.speedMetersPerSecond, -Constants.Speeds.SWERVE_DRIVE_MAX_SPEED, Constants.Speeds.SWERVE_DRIVE_MAX_SPEED);
+        double drive_pid = _driveController.calculate(getDriveVelocity(), state.speedMetersPerSecond);
 
-        speed += _driveController.calculate(getDriveVelocity(), state.speedMetersPerSecond);
+        double drive_output = (_reverseDrive ? -1 : 1) * ((speed / Constants.Speeds.SWERVE_DRIVE_MAX_SPEED * Constants.Speeds.SWERVE_DRIVE_COEFF) + drive_pid);
 
-        rotate(
-            rotation_volts / RobotController.getBatteryVoltage()
-        );
-
-        _driveMotor.set(TalonFXControlMode.PercentOutput, (_reverseDrive ? -1 : 1) * (speed / Constants.Speeds.SWERVE_DRIVE_MAX_SPEED) * Constants.Speeds.SWERVE_DRIVE_SPEED);
+        rotate(rotation_volts / RobotController.getBatteryVoltage());
+        // drive(drive_output);
     }
 }

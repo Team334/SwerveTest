@@ -16,10 +16,6 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-  public static class OperatorConstants {
-    public static final int kDriverControllerPort = 0;
-  }
-
   public static class CAN {
     public static final int DRIVE_FRONT_LEFT = 1;
     public static final int ROT_FRONT_LEFT = 2;
@@ -42,10 +38,10 @@ public final class Constants {
   }
 
   public static class Speeds {
-    public static final double SWERVE_DRIVE_SPEED = 0.3;
+    public static final double SWERVE_DRIVE_COEFF = 0.3;
 
     public static final double SWERVE_DRIVE_MAX_SPEED = 2.85; // TODO: Get this value
-    public static final double SWERVE_DRIVE_MAX_ANGULAR_SPEED = Math.PI * 2;
+    public static final double SWERVE_DRIVE_MAX_ANGULAR_SPEED = Math.PI * 2; // Todo: Get this value
   }
 
   public static class Physical {
@@ -70,5 +66,7 @@ public final class Constants {
    
   }
 
-  public static final int DRIVER_CONTROLLER = 0;
+  public static class Ports {
+    public static final int DRIVER_CONTROLLER = 0;
+  }
 }
