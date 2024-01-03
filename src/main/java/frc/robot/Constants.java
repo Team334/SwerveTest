@@ -38,10 +38,10 @@ public final class Constants {
   }
 
   public static class Speeds {
-    public static final double SWERVE_DRIVE_COEFF = 0.3;
+    public static final double SWERVE_DRIVE_COEFF = 0.4;
 
-    public static final double SWERVE_DRIVE_MAX_SPEED = 2.85; // TODO: Get this value
-    public static final double SWERVE_DRIVE_MAX_ANGULAR_SPEED = Math.PI * 2; // Todo: Get this value
+    public static final double SWERVE_DRIVE_MAX_SPEED = 2.88; // TODO: Get this value
+    public static final double SWERVE_DRIVE_MAX_ANGULAR_SPEED = Math.PI; // Todo: Get this value
   }
 
   public static class Physical {
@@ -59,7 +59,7 @@ public final class Constants {
   }
 
   public static class Offsets {
-    public static final double ENCODER_FRONT_LEFT = 85;
+    public static final double ENCODER_FRONT_LEFT = -93;
     public static final double ENCODER_FRONT_RIGHT = -58;
     public static final double ENCODER_BACK_RIGHT = 10;
     public static final double ENCODER_BACK_LEFT = 43;
