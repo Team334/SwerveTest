@@ -38,7 +38,7 @@ public final class Constants {
   }
 
   public static class Speeds {
-    public static final double SWERVE_DRIVE_COEFF = 0.4;
+    public static final double SWERVE_DRIVE_COEFF = 0.3;
 
     public static final double SWERVE_DRIVE_MAX_SPEED = 2.88; // TODO: Get this value
     public static final double SWERVE_DRIVE_MAX_ANGULAR_SPEED = Math.PI; // Todo: Get this value

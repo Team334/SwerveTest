@@ -16,14 +16,14 @@ import frc.robot.Constants;
 
 public class SwerveModule {
     private final TalonFX _driveMotor;
-    private final TalonFX _rotationMotor;
+    public final TalonFX _rotationMotor;
 
     private final PIDController _driveController;
     private final PIDController _rotationController;
 
     private final CANCoder _encoder;
 
-    public SwerveModule(int driveMotorId, int rotationMotorId, int encoderId, double angleOffset, double driveP) {
+    public SwerveModule(int driveMotorId, int rotationMotorId, int encoderId, double angleOffset, double driveP, double rotationP) {
         _driveMotor = new TalonFX(driveMotorId);
         _rotationMotor = new TalonFX(rotationMotorId);
 
@@ -34,7 +34,7 @@ public class SwerveModule {
 
         _driveController = new PIDController(driveP, 0, 0);
 
-        _rotationController = new PIDController(0.15, 0, 0);
+        _rotationController = new PIDController(rotationP, 0, 0);
         _rotationController.enableContinuousInput(-180, 180);
 
         TalonFXConfig.configureFalcon(_driveMotor);

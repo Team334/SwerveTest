@@ -57,9 +57,10 @@ public class TeleopDrive extends CommandBase {
     
     else {
       chassisSpeeds = new ChassisSpeeds(
+        // 0,
+        xSpeed * Constants.Speeds.SWERVE_DRIVE_MAX_SPEED,
+        // ySpeed * Constants.Speeds.SWERVE_DRIVE_MAX_SPEED,
         0,
-        // xSpeed * Constants.Speeds.SWERVE_DRIVE_MAX_SPEED,
-        ySpeed * Constants.Speeds.SWERVE_DRIVE_MAX_SPEED,
         0
         // rotationSpeed * Constants.Speeds.SWERVE_DRIVE_MAX_ANGULAR_SPEED
       );
