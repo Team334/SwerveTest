@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
 
 /** Contains controllers for robot and additional functions. */
 public class RobotCtrl {
-    public final CommandPS4Controller driveController = new CommandPS4Controller(Constants.DRIVER_CONTROLLER);
+    public final CommandPS4Controller driveController = new CommandPS4Controller(Constants.Ports.DRIVER_CONTROLLER);
 
     private final SlewRateLimiter _driveFilterLeftX = new SlewRateLimiter(4);
     private final SlewRateLimiter _driveFilterLeftY = new SlewRateLimiter(4);

@@ -6,16 +6,15 @@ package frc.robot.commands;
 
 import java.util.function.DoubleSupplier;
 
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.RobotCtrl;
-import frc.robot.subsystems.SwerveDrive;
+import frc.robot.subsystems.SwerveDriveSubsystem;
 
 public class TeleopDrive extends CommandBase {
-  private final SwerveDrive _swerveDrive;
+  private final SwerveDriveSubsystem _swerveDrive;
 
   private final DoubleSupplier _xSpeed;
   private final DoubleSupplier _ySpeed;
@@ -23,7 +22,7 @@ public class TeleopDrive extends CommandBase {
   private final DoubleSupplier _rotationSpeed;
 
   /** Creates a new TeleopDrive. */
-  public TeleopDrive(SwerveDrive swerveDrive, DoubleSupplier xSpeed, DoubleSupplier ySpeed, DoubleSupplier rotationSpeed) {
+  public TeleopDrive(SwerveDriveSubsystem swerveDrive, DoubleSupplier xSpeed, DoubleSupplier ySpeed, DoubleSupplier rotationSpeed) {
     _swerveDrive = swerveDrive;
 
     _xSpeed = xSpeed;
@@ -38,7 +37,6 @@ public class TeleopDrive extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    // _swerveDrive.stateTest(new SwerveModuleState(0, new Rotation2d(Math.toRadians(0))));
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -47,7 +45,7 @@ public class TeleopDrive extends CommandBase {
     // apply controller deadband
     double xSpeed = RobotCtrl.ApplyDeadband(_xSpeed.getAsDouble(), 0.1);
     double ySpeed = RobotCtrl.ApplyDeadband(_ySpeed.getAsDouble(), 0.1);
-    double rotationSpeed = RobotCtrl.ApplyDeadband(_rotationSpeed.getAsDouble(), 0.07);
+    double rotationSpeed = RobotCtrl.ApplyDeadband(_rotationSpeed.getAsDouble(), 0.1);
 
     // IMPORTANT: X-axis and Y-axis are flipped (based on wpilib coord system)
     ChassisSpeeds chassisSpeeds = new ChassisSpeeds(

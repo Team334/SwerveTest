@@ -4,11 +4,9 @@
 
 package frc.robot;
 
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.kinematics.SwerveModuleState;
 import frc.robot.commands.TeleopDrive;
-import frc.robot.commands.TestModule;
-import frc.robot.subsystems.SwerveDrive;
+import frc.robot.commands.ToggleSwerveOrient;
+import frc.robot.subsystems.SwerveDriveSubsystem;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -18,7 +16,7 @@ import frc.robot.subsystems.SwerveDrive;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final SwerveDrive _swerveDrive = new SwerveDrive();
+  private final SwerveDriveSubsystem _swerveDrive = new SwerveDriveSubsystem();
   private final RobotCtrl _robotCtrl = new RobotCtrl();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -32,6 +30,6 @@ public class RobotContainer {
   }
 
   private void configureBindings() {
-
+    _robotCtrl.driveController.R1().onTrue(new ToggleSwerveOrient(_swerveDrive));
   }
 }
